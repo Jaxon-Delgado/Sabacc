@@ -1,7 +1,6 @@
 //TITLE STUFF
-var playButton;
-window.onload = function() {
-  playButton = document.getElementById("playButton");
+window.onload = function () {
+  window.myJump = new JumpToHyperspace()
   //playButton.addEventListener('mousedown', JumpToHyperspace.initiate)
   //playButton.addEventListener('touchstart', JumpToHyperspace.initiate)
   //playButton.addEventListener('mouseup', JumpToHyperspace.enter)
@@ -12,21 +11,24 @@ window.onload = function() {
 
 
 function fade(element) {
-  var op = 1;  // initial opacity
+  var op = 1; // initial opacity
   var timer = setInterval(function () {
-      if (op <= 0.1){
-          clearInterval(timer);
-          element.style.display = 'none';
-      }
-      element.style.opacity = op;
-      element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-      op -= op * 0.1;
+    if (op <= 0.1) {
+      clearInterval(timer);
+      element.style.display = 'none';
+    }
+    element.style.opacity = op;
+    element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+    op -= op * 0.1;
   }, 50);
 }
 
 //STAR STUFF
 
-const { TweenMax, _ } = window
+const {
+  TweenMax,
+  _
+} = window
 /**
  * Utility function for returning a random integer in a given range
  * @param {Int} max
@@ -43,10 +45,10 @@ const JUMP_SIZE_INC = 1.15
 const SIZE_INC = 1.01
 const RAD = Math.PI / 180
 const WARP_COLORS = [
-  [197, 239, 247],
-  [25, 181, 254],
-  [77, 5, 232],
-  [165, 55, 253],
+  [255, 255, 255],
+  [255, 255, 255],
+  [255, 255, 255],
+  [255, 255, 255],
   [255, 255, 255],
 ]
 /**
@@ -63,9 +65,9 @@ class Star {
     const vX = Math.cos(angle)
     const vY = Math.sin(angle)
     const travelled =
-      Math.random() > 0.5
-        ? Math.random() * Math.max(window.innerWidth, window.innerHeight) + (Math.random() * (window.innerWidth * 0.24))
-        : Math.random() * (window.innerWidth * 0.25)
+      Math.random() > 0.5 ?
+      Math.random() * Math.max(window.innerWidth, window.innerHeight) + (Math.random() * (window.innerWidth * 0.24)) :
+      Math.random() * (window.innerWidth * 0.25)
     this.STATE = {
       ...this.STATE,
       iX: undefined,
@@ -130,7 +132,18 @@ class JumpToHyperspace {
     }
     // 2. Update the stars and draw them.
     for (const star of stars.filter(s => s.STATE.active)) {
-      const { active, x, y, iX, iY, iVX, iVY, size, vX, vY } = star.STATE
+      const {
+        active,
+        x,
+        y,
+        iX,
+        iY,
+        iVX,
+        iVY,
+        size,
+        vX,
+        vY
+      } = star.STATE
       // Check if the star needs deactivating
       if (
         ((iX || x) < 0 ||
@@ -186,7 +199,10 @@ class JumpToHyperspace {
       initiating: true,
       initiateTimestamp: new Date().getTime(),
     }
-    TweenMax.to(this.STATE, 0.25, {velocity: VELOCITY_INIT_INC, bgAlpha: 0.3})
+    TweenMax.to(this.STATE, 0.25, {
+      velocity: VELOCITY_INIT_INC,
+      bgAlpha: 0.3
+    })
     // When we initiate, stop the XY origin from moving so that we draw
     // longer lines until the jump
     for (const star of this.STATE.stars.filter(s => s.STATE.active)) {
@@ -206,18 +222,29 @@ class JumpToHyperspace {
       bgAlpha: 0,
       jumping: true,
     }
-    TweenMax.to(this.STATE, 0.25, { velocity: JUMP_VELOCITY_INC, bgAlpha: 0.75, sizeInc: JUMP_SIZE_INC })
+    TweenMax.to(this.STATE, 0.25, {
+      velocity: JUMP_VELOCITY_INC,
+      bgAlpha: 0.75,
+      sizeInc: JUMP_SIZE_INC
+    })
     setTimeout(() => {
       this.STATE = {
         ...this.STATE,
         jumping: false,
       }
-      TweenMax.to(this.STATE, 0.25, { bgAlpha: 0, velocity: VELOCITY_INC, sizeInc: SIZE_INC })
+      TweenMax.to(this.STATE, 0.25, {
+        bgAlpha: 0,
+        velocity: VELOCITY_INC,
+        sizeInc: SIZE_INC
+      })
     }, 4500)
+    this.zoomTable()
   }
   enter = () => {
     if (this.STATE.jumping) return
-    const { initiateTimestamp } = this.STATE
+    const {
+      initiateTimestamp
+    } = this.STATE
     this.STATE = {
       ...this.STATE,
       initiating: false,
@@ -226,7 +253,10 @@ class JumpToHyperspace {
     if (new Date().getTime() - initiateTimestamp > 600) {
       this.jump()
     } else {
-      TweenMax.to(this.STATE, 0.25, {velocity: VELOCITY_INC, bgAlpha: 0})
+      TweenMax.to(this.STATE, 0.25, {
+        velocity: VELOCITY_INC,
+        bgAlpha: 0
+      })
     }
   }
   bind = () => {
@@ -252,8 +282,25 @@ class JumpToHyperspace {
     }
     this.setup()
   }
+
+  //zoom in sabacca table
+  zoomTable = () => {
+
+    var delayInMilliseconds = 4600;
+    setTimeout(function () {
+      document.getElementById("sabaccTable").setAttribute("style", "height:100%");
+      document.getElementById("tableDiv").setAttribute("style", "padding:0%");
+      document.getElementById("staticStars").setAttribute("style", "visibility:visible");
+      
+    }, delayInMilliseconds);
+    setTimeout(function () {
+      ((myJump.canvas).parentNode).removeChild((myJump.canvas));
+    }, 5200);
+
+  }
 }
-window.myJump = new JumpToHyperspace()
+
+
 window.addEventListener(
   'resize',
   _.debounce(() => {
