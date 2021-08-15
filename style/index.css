@@ -12,20 +12,20 @@
 }
 
 .playButton {
-	background-color: black;
+	background-color: #385c25;
 	border-radius:16px;
 	border:2px solid #000000;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Georgia;
+	font-family: 'Pathway Gothic One', sans-serif;
 	font-size:17px;
 	font-weight:bold;
 	padding:11px 76px;
 	text-decoration:none;
 }
 .playButton:hover {
-	background-color:#385c25;
+	background-color:blue;
 }
 .playButton:active {
 	position:relative;
@@ -33,13 +33,13 @@
 }
 
 .rulesButton {
-	background-color: black;
+	background-color: #fff000;
 	border-radius:16px;
 	border:2px solid #000000;
 	display:inline-block;
 	cursor:pointer;
-	color:#ffffff;
-	font-family:Georgia;
+	color:black;
+	font-family: 'Pathway Gothic One', sans-serif;
 	font-size:17px;
 	font-weight:bold;
 	padding:11px 76px;

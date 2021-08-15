@@ -1,3 +1,31 @@
+//TITLE STUFF
+var playButton;
+window.onload = function() {
+  playButton = document.getElementById("playButton");
+  //playButton.addEventListener('mousedown', JumpToHyperspace.initiate)
+  //playButton.addEventListener('touchstart', JumpToHyperspace.initiate)
+  //playButton.addEventListener('mouseup', JumpToHyperspace.enter)
+  //playButton.addEventListener('touchend', JumpToHyperspace.enter)
+};
+
+
+
+
+function fade(element) {
+  var op = 1;  // initial opacity
+  var timer = setInterval(function () {
+      if (op <= 0.1){
+          clearInterval(timer);
+          element.style.display = 'none';
+      }
+      element.style.opacity = op;
+      element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+      op -= op * 0.1;
+  }, 50);
+}
+
+//STAR STUFF
+
 const { TweenMax, _ } = window
 /**
  * Utility function for returning a random integer in a given range
@@ -172,6 +200,7 @@ class JumpToHyperspace {
     }
   }
   jump = () => {
+    fade(document.getElementById("title"))
     this.STATE = {
       ...this.STATE,
       bgAlpha: 0,
@@ -184,7 +213,7 @@ class JumpToHyperspace {
         jumping: false,
       }
       TweenMax.to(this.STATE, 0.25, { bgAlpha: 0, velocity: VELOCITY_INC, sizeInc: SIZE_INC })
-    }, 2500)
+    }, 4500)
   }
   enter = () => {
     if (this.STATE.jumping) return
@@ -201,10 +230,15 @@ class JumpToHyperspace {
     }
   }
   bind = () => {
+    var playButton = document.getElementById("playButton");
     this.canvas.addEventListener('mousedown', this.initiate)
+    playButton.addEventListener('mousedown', this.initiate)
     this.canvas.addEventListener('touchstart', this.initiate)
+    playButton.addEventListener('touchstart', this.initiate)
     this.canvas.addEventListener('mouseup', this.enter)
+    playButton.addEventListener('mouseup', this.enter)
     this.canvas.addEventListener('touchend', this.enter)
+    playButton.addEventListener('touchend', this.enter)
   }
   setup = () => {
     this.context.lineCap = 'round'

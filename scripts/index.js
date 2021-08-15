@@ -4,6 +4,7 @@ function clearTitle() {
     console.log("Clicked these nuts");
     //document.getElementById("titleDiv").hidden = true;
     fade(document.getElementById("titleDiv"));
+    
 }
 
 
