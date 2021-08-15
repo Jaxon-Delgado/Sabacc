@@ -1,0 +1,55 @@
+#logo {
+    width: 40%;
+    
+}
+#title {
+    text-align: center;
+    padding: 10%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.playButton {
+	background-color: black;
+	border-radius:16px;
+	border:2px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:17px;
+	font-weight:bold;
+	padding:11px 76px;
+	text-decoration:none;
+}
+.playButton:hover {
+	background-color:#385c25;
+}
+.playButton:active {
+	position:relative;
+	top:1px;
+}
+
+.rulesButton {
+	background-color: black;
+	border-radius:16px;
+	border:2px solid #000000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Georgia;
+	font-size:17px;
+	font-weight:bold;
+	padding:11px 76px;
+	text-decoration:none;
+}
+.rulesButton:hover {
+	background-color:red;
+}
+.rulesButton:active {
+	position:relative;
+	top:1px;
+}
+
