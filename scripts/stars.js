@@ -290,7 +290,7 @@ class JumpToHyperspace {
     setTimeout(function () {
       document.getElementById("sabaccTable").setAttribute("style", "height:100%");
       document.getElementById("tableDiv").setAttribute("style", "padding:0%");
-      document.getElementById("staticStars").setAttribute("style", "visibility:visible");
+      document.getElementById("staticStars").setAttribute("style", "visibility:visible", "backgroundRepeat=repeat-x");
       
     }, delayInMilliseconds);
     setTimeout(function () {
